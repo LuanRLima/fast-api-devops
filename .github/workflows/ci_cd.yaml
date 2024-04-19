@@ -83,4 +83,5 @@ jobs:
           kubectl apply -f service.yaml
 
       - name: Get pods status
-        run: kubectl get pods -n fastapi-app # Adjust namespace if needed
+        run: |
+          kubectl get pods
