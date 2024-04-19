@@ -18,6 +18,7 @@ async def root():
 
 @app.get("/employees")
 async def get_employees():
+    print('DB connecting')
     connection = mysql.connector.connect(
         user='root',
         password='RootPassword',
