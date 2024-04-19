@@ -1,5 +1,5 @@
-CREATE DATABASE employees;
-use employees;
+CREATE DATABASE Company;
+use Company;
 
 CREATE TABLE employees (
 first_name varchar(25),
