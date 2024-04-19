@@ -1,0 +1,52 @@
+name: CI/CD with MySQL and FastAPI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          cd main
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build MySQL container
+        run: |
+          docker build -t mysql_container -f ../db/Dockerfile ../db
+          docker run -d --name mysql_container \
+            -e MYSQL_ROOT_PASSWORD=password \
+            -e MYSQL_DATABASE=my_database \
+            -e MYSQL_USER=my_user \
+            -e MYSQL_PASSWORD=my_password \
+            mysql_container
+
+      - name: Wait for MySQL to start
+        run: |
+          while ! docker logs mysql_container | grep -q 'Ready for connections'; do sleep 2; done
+
+      - name: Build FastAPI image
+        run: |
+          cd main
+          docker build -t my-fastapi-image .
+
+      - name: Run API functional test
+        run: |
+          docker run -d --name fastapi_container --network="host" -e DATABASE_URL=mysql://my_user:password@127.0.0.1:3306/my_database my-fastapi-image
+          curl http://localhost:8000/healthcheck  # Adjust API endpoint
+          docker stop fastapi_container
+
+      - name: Stop MySQL container
+        run: docker stop mysql_container

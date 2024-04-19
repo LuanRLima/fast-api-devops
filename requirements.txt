@@ -1,0 +1,16 @@
+# Core dependencies
+fastapi
+uvicorn
+
+# Database (MySQL)
+mysql-connector-python
+
+# SQLAlchemy
+sqlalchemy
+
+# Password hashing
+passlib
+bcrypt
+
+# Prometheus instrumentation (optional)
+prometheus-fastapi-instrumentator

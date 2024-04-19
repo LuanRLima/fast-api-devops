@@ -1,4 +1,4 @@
-FROM python:3.x # Replace with your desired Python version
+FROM python:3.x
 
 WORKDIR /app
 
