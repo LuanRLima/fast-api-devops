@@ -41,11 +41,12 @@ jobs:
       - name: Build FastAPI image
         run: |
           docker build -t my-fastapi-image .
+          docket inspect my-fastapi-image
 
       - name: Run API functional test
         run: |
           docker run -d --name fastapi_container --network="host" -e DATABASE_URL=mysql://my_user:my_password@172.17.0.2:3306/my_database my-fastapi-image
-          curl http://localhost:8000/healthcheck  # Adjust API endpoint
+          curl http://localhost:80/healthcheck  # Adjust API endpoint
           docker stop fastapi_container
 
       - name: Stop MySQL container
