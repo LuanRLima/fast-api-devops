@@ -44,7 +44,7 @@ jobs:
 
       - name: Run API functional test
         run: |
-          docker run -d --name fastapi_container --network="host" -e DATABASE_URL=mysql://my_user:my_password@127.0.0.1:3306/my_database my-fastapi-image
+          docker run -d --name fastapi_container --network="host" -e DATABASE_URL=mysql://my_user:my_password@172.17.0.2:3306/my_database my-fastapi-image
           curl http://localhost:8000/healthcheck  # Adjust API endpoint
           docker stop fastapi_container
 
