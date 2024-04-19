@@ -29,9 +29,9 @@ jobs:
       - name: Build MySQL container
         run: |
           docker build -t mysql_container -f db/Dockerfile db/
-          docker run -d --name mysql_container \
-            -e MYSQL_ROOT_PASSWORD=password \
-            -e MYSQL_DATABASE=my_database \
+          docker run -d --name company-database \
+            -e MYSQL_ROOT_PASSWORD=RootPassword  \
+            -e MYSQL_DATABASE=company-database \
             -e MYSQL_USER=my_user \
             -e MYSQL_PASSWORD=my_password \
             mysql_container
