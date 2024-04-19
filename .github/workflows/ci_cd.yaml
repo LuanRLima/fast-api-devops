@@ -57,27 +57,3 @@ jobs:
 
       - name: Stop MySQL container
         run: docker stop company-database
-
-
-      - name: Upload Docker image
-        run: |
-          docker tag my-fastapi-image ${{ secrets.DOCKERHUB_USERNAME }}/my-fastapi-image
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-fastapi-image
-
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up kubectl
-        uses: actions/setup-kubectl@v2
-        with:
-          cluster-context: kubernetes-default
-          kubectl-version: latest
-     # Kubernetes Image Build
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl apply -f app-deployment.yaml
-          kubectl apply -f service.yaml
-
-      - name: Get pods status
-        run: |
-          kubectl get pods -n fastapi-app
