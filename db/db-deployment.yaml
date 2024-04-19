@@ -67,10 +67,10 @@ metadata:
     app: mysql
     tier: database
 spec:
+  type: ClusterIP
   ports:
     - port: 3306
       targetPort: 3306
   selector:
     app: mysql
     tier: database
-  clusterIP: None
