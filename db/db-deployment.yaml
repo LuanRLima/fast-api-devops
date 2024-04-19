@@ -43,6 +43,10 @@ spec:
               value: "123456"
             - name: MYSQL_DATABASE
               value: "Company"
+            - name: MYSQL_USER
+              value: "my_user"
+            - name: MYSQL_PASSWORD
+              value: "my_password"
           ports:
             - containerPort: 3306
               name: mysql
