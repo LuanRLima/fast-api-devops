@@ -46,6 +46,10 @@ jobs:
           docker run -d --name fastapi_container -p 80:80 -e DATABASE_URL=mysql://my_user:my_password@172.17.0.2:3306/my_database my-fastapi-image
           docker inspect fastapi_container
           sleep 5
+          ping localhost
+          ping 172.17.0.3
+          telnet localhost 
+          telnet 172.17.0.3
           curl http://localhost:80/healthcheck  # Adjust API endpoint
           docker stop fastapi_container
 
