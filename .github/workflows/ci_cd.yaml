@@ -35,6 +35,8 @@ jobs:
             -e MYSQL_USER=my_user \
             -e MYSQL_PASSWORD=my_password \
             mysql_container
+      - name: check-container-fully-started
+        run: docker inspect company-database
 
       - name: Build FastAPI image
         run: |
