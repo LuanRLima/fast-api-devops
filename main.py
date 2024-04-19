@@ -1,13 +1,14 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from sqlalchemyimport create_engine
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from passlib.context import CryptContext
 from bcrypt import hashpw, gensalt, checkpw
 from prometheus_fastapi_instrumentator import Instrumentator
+import sqlalchemy.exc
 
 # Database Configuration
-DATABASE_URL = "mysql://user:password@host/database"
+DATABASE_URL = "mysql://root:RootPassword@host/Company"
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()

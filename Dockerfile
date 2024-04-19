@@ -1,12 +1,8 @@
-FROM python:3.x
+# Derivando da imagem oficial do MySQL
+FROM mysql:5.7
 
-WORKDIR /app
+# Adicionando um database (variável de ambiente)
+ENV MYSQL_DATABASE Company
 
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
-
-COPY . .
-
-EXPOSE 8000 # Replace with your desired port
-
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Adicionando os scripts SQL para serem executados na criação do banco
+COPY ./database/ /docker-entrypoint-initdb.d/
