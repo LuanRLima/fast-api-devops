@@ -6,7 +6,6 @@ ENV MYSQL_USER my_user
 ENV MYSQL_PASSWORD my_password
 
 RUN set -x && \
-    while ! mysqladmin ping -h"localhost" --silent; do sleep 1; done && \
     # Database and User Setup (within the RUN instruction)
     echo "Creating database: ${MYSQL_DATABASE}" && \
     mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};" && \
