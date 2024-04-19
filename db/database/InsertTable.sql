@@ -1,11 +1,10 @@
-- Insert #1
 INSERT INTO users (username, email, hashed_password)
-VALUES ('john_doe', 'john.doe@example.com', '$2b$12$0j83alKJhaWdf88271O56u');
+VALUES ('john_doe', 'john.doe@example.com', '<newly_generated_hash1>');
 
 -- Insert #2
 INSERT INTO users (username, email, hashed_password)
-VALUES ('jane_smith', 'jane@email.com', '$2b$12$8dhs76HGD8714tS45Hgfse');
+VALUES ('jane_smith', 'jane@email.com', '<newly_generated_hash2>');
 
 -- Insert #3
 INSERT INTO users (username, email, hashed_password)
-VALUES ('sarah_connor', 'sarah.connor@email.com', '$2b$12$3X1jU2lZf7k1aV21i3B6Eu');
+VALUES ('sarah_connor', 'sarah.connor@email.com', '<newly_generated_hash3>');
