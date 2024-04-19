@@ -64,6 +64,14 @@ jobs:
           docker tag my-fastapi-image ${{ secrets.DOCKERHUB_USERNAME }}/my-fastapi-image
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-fastapi-image
 
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up kubectl
+        uses: actions/setup-kubectl@v2
+        with:
+          cluster-context: kubernetes-default
+          kubectl-version: latest
      # Kubernetes Image Build
       - name: Deploy to Kubernetes
         run: |
