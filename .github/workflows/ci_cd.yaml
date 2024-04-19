@@ -50,4 +50,4 @@ jobs:
           docker stop fastapi_container
 
       - name: Stop MySQL container
-        run: docker stop mysql_container
+        run: docker stop company-database
