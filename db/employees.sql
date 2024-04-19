@@ -1,4 +1,4 @@
-CREATE DATABASE Company;
+CREATE DATABASE IF NOT EXISTS Company;
 use Company;
 
 CREATE TABLE employees (
