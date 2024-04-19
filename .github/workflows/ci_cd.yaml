@@ -53,7 +53,7 @@ jobs:
           docker inspect fastapi_container
           sleep 5
           curl http://localhost:80/healthcheck
-          curl http://localhost:31397/employees
+          curl http://localhost:80/employees
           # Adjust API endpo  int
           docker stop fastapi_container
 
