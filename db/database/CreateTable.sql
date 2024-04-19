@@ -1,6 +1,6 @@
-CREATE TABLE users (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(255) UNIQUE NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    hashed_password VARCHAR(255) NOT NULL
+CREATE TABLE employees (
+first_name varchar(25),
+last_name  varchar(25),
+department varchar(15),
+email  varchar(50)
 );
