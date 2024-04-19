@@ -1,9 +1,9 @@
 FROM mysql:latest
 
 ENV MYSQL_ROOT_PASSWORD password
-ENV MYSQL_DATABASE your_database_name
-ENV MYSQL_USER your_database_user
-ENV MYSQL_PASSWORD your_database_user_password
+ENV MYSQL_DATABASE my_database
+ENV MYSQL_USER my_user
+ENV MYSQL_PASSWORD my_password
 
 RUN set -x && \
     echo "Creating database: ${MYSQL_DATABASE}" && \
