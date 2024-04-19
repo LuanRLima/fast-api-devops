@@ -1,0 +1,30 @@
+name: Deploy to Kubernetes
+
+on:
+  workflow_run:
+    workflows: [ "CI/CD with MySQL and FastAPI" ] # Trigger this on successful build workflow run
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up kubectl
+        uses: actions/setup-kubectl@v2
+        with:
+          cluster-context: kubernetes-default # Replace with your cluster context
+          kubectl-version: latest
+
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f app-deployment.yaml
+          kubectl apply -f service.yaml
+
+      - name: Get pods status
+        run: |
+          kubectl get pods
