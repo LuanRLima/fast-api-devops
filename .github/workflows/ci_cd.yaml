@@ -63,3 +63,13 @@ jobs:
         run: |
           docker tag my-fastapi-image ${{ secrets.DOCKERHUB_USERNAME }}/my-fastapi-image
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-fastapi-image
+
+     # Kubernetes Image Build
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f app-deployment.yaml
+          kubectl apply -f service.yaml
+
+      - name: Get pods status
+        run: |
+          kubectl get pods -n fastapi-app
