@@ -1,4 +1,4 @@
-name: Deploy to Kubernetes
+name: Get Pods Status (Free)
 
 on:
   workflow_run:
@@ -7,17 +7,12 @@ on:
       - completed
 
 jobs:
-  deploy:
+  get_pods:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      ## Prerequisite Setup
-
-      - name: Set up Docker
-        uses: actions/setup-docker@v3 # Install Docker
 
       - name: Set up kubectl
         uses: actions/setup-kubectl@v2
