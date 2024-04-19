@@ -36,10 +36,6 @@ jobs:
             -e MYSQL_PASSWORD=my_password \
             mysql_container
 
-      - name: Wait for MySQL to start
-        run: |
-          while ! docker logs company-database | grep -q 'Ready for connections'; do sleep 2; done
-
       - name: Build FastAPI image
         run: |
           cd main
