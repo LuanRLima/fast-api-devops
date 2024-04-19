@@ -2,8 +2,9 @@ name: CI/CD with MySQL and FastAPI
 
 on:
   push:
-    branches: [ master ]
-
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
