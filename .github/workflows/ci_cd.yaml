@@ -38,7 +38,6 @@ jobs:
 
       - name: Build FastAPI image
         run: |
-          cd main
           docker build -t my-fastapi-image .
 
       - name: Run API functional test
