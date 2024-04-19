@@ -2,7 +2,7 @@ name: Deploy to Kubernetes
 
 on:
   workflow_run:
-    workflows: [ "CI/CD with MySQL and FastAPI" ] # Trigger this on successful build workflow run
+    workflows: [ "CI/CD with MySQL and FastAPI" ]
     types:
       - completed
 
@@ -14,11 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      ## Prerequisite Setup
+
+      - name: Set up Docker
+        uses: actions/setup-docker@v3 # Install Docker
+
       - name: Set up kubectl
         uses: actions/setup-kubectl@v2
         with:
-          cluster-context: kubernetes-default # Replace with your cluster context
+          cluster-context: kubernetes-default
           kubectl-version: latest
+
+      ## Deployment Steps
 
       - name: Deploy to Kubernetes
         run: |
@@ -27,4 +34,4 @@ jobs:
 
       - name: Get pods status
         run: |
-          kubectl get pods
+          kubectl get pods -n fastapi-app
