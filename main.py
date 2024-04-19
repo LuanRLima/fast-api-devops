@@ -1,8 +1,17 @@
 from fastapi import FastAPI
 import mysql.connector
+from prometheus_fastapi_instrumentator import Instrumentator
+from prometheus_client import Counter, Summary
+
+
 
 app = FastAPI()
 
+DB_QUERY_TIME = Summary('db_query_time_seconds', 'Time spent executing database queries')
+DB_CONNECTIONS = Counter('db_connections_total', 'Total number of database connections')
+
+# Prometheus Instrumentation
+Instrumentator().instrument(app).expose(app)
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
@@ -17,7 +26,10 @@ async def get_employees():
         database='Company'
     )
     print('DB connected')
+
     cursor = connection.cursor(dictionary=True)
+    DB_CONNECTIONS.inc()  # Increment DB connections counter
+    DB_QUERY_TIME.time()
     cursor.execute('Select * FROM employees')
     employees = cursor.fetchall()
     datas = []

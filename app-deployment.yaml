@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-deployment
+  namespace: fastapi-app
+  labels:
+    app: fastapi
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - name: my-fastapi
+        image: luanrlima9/my-fastapi-image:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: DATABASE_URL
+          value: mysql://<db_username>:<db_password>@<db_host>:80/<db_name>
