@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Body, HTTPException
 import redis
 from prometheus_fastapi_instrumentator import Instrumentator
-from prometheus_client import Counter, Summary
+from prometheus_client import Counter, Summary, Histogram
 
 app = FastAPI()
 
