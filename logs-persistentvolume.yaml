@@ -1,0 +1,13 @@
+# PV
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: logs-persistentvolume
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteMany
+  hostPath:
+    path: 'C:\kubernetes\persistentvolume'

@@ -1,0 +1,12 @@
+# PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: logs-persistentvolumeclaim
+spec:
+  storageClassName: manual
+  resources:
+    requests:
+      storage: 200Mi
+  accessModes:
+  - ReadWriteMany

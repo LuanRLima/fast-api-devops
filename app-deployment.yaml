@@ -19,6 +19,3 @@ spec:
         image: luanrlima9/my-fastapi-image:latest
         ports:
         - containerPort: 80
-        env:
-        - name: DATABASE_URL
-          value: mysql://my_user:my_password@mysql:3306/Company
