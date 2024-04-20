@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
-      - name: Build MySQL container
+      - name: Build redis_container
         run: |
           docker build -t redis_container  -f db/Dockerfile db/
           docker run -d --name company-redis -p 6379:6379 redis_container
@@ -52,5 +52,5 @@ jobs:
           # ... Other tests
           docker stop fastapi_container
 
-      - name: Stop MySQL container
-        run: docker stop company-database
+      - name: Stop redis_container
+        run: docker stop redis_container
