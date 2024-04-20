@@ -1,10 +1,11 @@
-FROM mysql:5.7
+# Use the official Redis image as the base
+FROM redis:latest
 
-# Adicionando um database (variável de ambiente)
-ENV MYSQL_DATABASE=Company
-ENV MYSQL_ROOT_PASSWORD=123456
-ENV MYSQL_USER=my_user
-ENV MYSQL_PASSWORD=my_password
+# Optional: Set a working directory (where the commands within the container are executed)
+WORKDIR /data
 
-# Adicionando os scripts SQL para serem executados na criação do banco
-COPY ./employees.sql/ /docker-entrypoint-initdb.d/
+# Expose the default Redis port
+EXPOSE 6379
+
+# Specify the command to start the Redis server (this is inherited from the base image)
+CMD [ "redis-server" ] 
