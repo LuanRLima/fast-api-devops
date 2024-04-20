@@ -32,19 +32,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
-      - name: Build redis container
+      - name: Build MySQL container
         run: |
           docker build -t redis_container  -f db/Dockerfile db/
           docker run -d --name company-redis -p 6379:6379 redis_container
       - name: check-container-fully-started
         run: docker inspect company-redis
 
+      - name: Build FastAPI image
+        run: |
+          docker build -t my-fastapi-image .
       - name: Run API functional test
         run: |
-          docker build -t my-fastapi-image .  # Build (if needed)
-          docker run -d --name fastapi_container -p 80:80 \
-                 --link company-redis:redis \      # Connect to Redis container
-                 my-fastapi-image 
+          docker run -d --name fastapi_container -p 80:80 --link company-redis:redis my-fastapi-image 
           docker inspect fastapi_container
           sleep 5 
           curl http://localhost:80/healthcheck 
@@ -53,4 +53,4 @@ jobs:
           docker stop fastapi_container
 
       - name: Stop MySQL container
-        run: docker stop redis_container
+        run: docker stop company-database
